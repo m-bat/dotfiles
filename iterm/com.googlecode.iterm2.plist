@@ -44462,11 +44462,11 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>623 102 591 99 0 0 1280 777 </string>
+	<string>623 70 591 77 0 0 1280 800 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>327 253 796 474 0 0 1280 800 </string>
+	<string>327 148 796 474 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 45 1277 732 0 0 1280 777 </string>
+	<string>0 37 570 402 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>171 250 570 452 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
@@ -45099,7 +45099,7 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>InconsolataForPowerline 12</string>
+			<string>SourceCodeProForPowerline-Bold 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
