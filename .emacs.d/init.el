@@ -2,7 +2,7 @@
 ;;; package --- summary:
 
 (require 'package)
-;; MELPAを追加
+;; MELPAを追加 manabu!!
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; MELPA-stableを追加
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
