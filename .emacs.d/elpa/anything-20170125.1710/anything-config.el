@@ -5968,7 +5968,7 @@ Set `recentf-max-saved-items' to a bigger value if default is too small.")
 (defvar anything-c-source-filelist
   '((name . "FileList")
     (grep-candidates . anything-c-filelist-file-name)
-    (candidate-number-limit . 200)
+    (candidate-number-limit . 1000)
     (requires-pattern . 4)
     (type . file))
   "Source to find files instantly.

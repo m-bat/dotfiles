@@ -26,7 +26,7 @@
 			(normal-top-level-add-subdirs-to-load-path))))))
 
 ;;elispとconfdirectoryをsubdirectryごとにload-pathに追加
-;;(add-to-load-path "elisp" "conf")
+;; (add-to-load-path "elisp" "conf")
 
 ;; (install-elisp "https://www.emacswiki.org/emacs/download/auto-install.el")
 (when (require 'auto-install nil t)
@@ -34,7 +34,7 @@
   (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; EmacsWikiに登録されているelispの名前を取得する
   ;; いちいちnetworkに繋るため、起動が遅くなる. comment outしておく（現状）
-  ;;(auto-install-update-emacswiki-package-name t)
+  ;; (auto-install-update-emacswiki-package-name t)
   ;;install-elispの関数を利用可能にする
   (auto-install-compatibility-setup))
 
@@ -71,7 +71,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
+    (0blayout descbinds-anything describe-number anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
  '(py-indent-offset 4))
 ;;; abbrev
 
@@ -290,6 +290,25 @@
 
 ;; anything-git-files
 (require 'anything-git-files)
+(add-to-list 'descbinds-anything-source-template '(candidate-number-limit . 9999))
 
-
+(defun tarao/anything-for-files ()
+  (interactive)
+  (require 'anything-config)
+  (require 'anything-git-files)
+  (let* ((git-source (and (anything-git-files:git-p)
+                          `(anything-git-files:modified-source
+                            anything-git-files:untracked-source
+                            anything-git-files:all-source
+                            ,@(anything-git-files:submodule-sources 'all))))
+         (other-source '(anything-c-source-recentf
+                         anything-c-source-bookmarks
+                         anything-c-source-files-in-current-dir+
+                         anything-c-source-locate))
+         (sources `(anything-c-source-buffers+
+                    anything-c-source-ffap-line
+                    anything-c-source-ffap-guesser
+                    ,@git-source
+                    ,@other-source)))
+    (anything-other-buffer sources "*anything for files*")))
 
