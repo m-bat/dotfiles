@@ -65,8 +65,14 @@
 
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 (custom-set-variables
- '(py-indent-offset 4)
- )
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
+ '(py-indent-offset 4))
 ;;; abbrev
 
 ;;YAML mode の設定
@@ -94,14 +100,7 @@
   (ac-config-default))
 
 ;;flycheck
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -289,6 +288,8 @@
 ;;(add-hook 'latex-mode-hook 'turn-on-reftex)
 (add-hook 'yatex-mode-hook 'turn-on-reftex)
 
+;; anything-git-files
+(require 'anything-git-files)
 
 
 
