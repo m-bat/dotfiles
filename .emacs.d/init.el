@@ -61,8 +61,19 @@
 
 (setq-default c-basic-offset 4     ;;基本インデント量4
               tab-width 4          ;;タブ幅4
-               indent-tabs-mode nil)  ;;インデントをタブでするかスペースでするか
+              indent-tabs-mode nil)  ;;インデントをタブでするかスペースでするか
 
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+(custom-set-variables
+ '(py-indent-offset 4)
+ )
+;;; abbrev
+
+;;YAML mode の設定
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+;; hook
 (add-hook 'c-mode-hook 'my-c-c++-mode-init)
 (add-hook 'c++-mode-hook 'my-c-c++-mode-init)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -90,7 +101,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip))))
+    (python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -277,3 +288,7 @@
 ;; texファイルを開くと自動でRefTexモード
 ;;(add-hook 'latex-mode-hook 'turn-on-reftex)
 (add-hook 'yatex-mode-hook 'turn-on-reftex)
+
+
+
+
