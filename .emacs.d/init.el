@@ -26,7 +26,7 @@
 			(normal-top-level-add-subdirs-to-load-path))))))
 
 ;;elispとconfdirectoryをsubdirectryごとにload-pathに追加
-;;(add-to-load-path "elisp" "conf")
+;; (add-to-load-path "elisp" "conf")
 
 ;; (install-elisp "https://www.emacswiki.org/emacs/download/auto-install.el")
 (when (require 'auto-install nil t)
@@ -34,7 +34,7 @@
   (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; EmacsWikiに登録されているelispの名前を取得する
   ;; いちいちnetworkに繋るため、起動が遅くなる. comment outしておく（現状）
-  ;;(auto-install-update-emacswiki-package-name t)
+  ;; (auto-install-update-emacswiki-package-name t)
   ;;install-elispの関数を利用可能にする
   (auto-install-compatibility-setup))
 
@@ -61,8 +61,25 @@
 
 (setq-default c-basic-offset 4     ;;基本インデント量4
               tab-width 4          ;;タブ幅4
-               indent-tabs-mode nil)  ;;インデントをタブでするかスペースでするか
+              indent-tabs-mode nil)  ;;インデントをタブでするかスペースでするか
 
+(autoload 'python-mode "python-mode" "Python editing mode." t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (0blayout descbinds-anything describe-number anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
+ '(py-indent-offset 4))
+;;; abbrev
+
+;;YAML mode の設定
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+;; hook
 (add-hook 'c-mode-hook 'my-c-c++-mode-init)
 (add-hook 'c++-mode-hook 'my-c-c++-mode-init)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -83,14 +100,7 @@
   (ac-config-default))
 
 ;;flycheck
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -277,3 +287,28 @@
 ;; texファイルを開くと自動でRefTexモード
 ;;(add-hook 'latex-mode-hook 'turn-on-reftex)
 (add-hook 'yatex-mode-hook 'turn-on-reftex)
+
+;; anything-git-files
+(require 'anything-git-files)
+(add-to-list 'descbinds-anything-source-template '(candidate-number-limit . 9999))
+
+(defun tarao/anything-for-files ()
+  (interactive)
+  (require 'anything-config)
+  (require 'anything-git-files)
+  (let* ((git-source (and (anything-git-files:git-p)
+                          `(anything-git-files:modified-source
+                            anything-git-files:untracked-source
+                            anything-git-files:all-source
+                            ,@(anything-git-files:submodule-sources 'all))))
+         (other-source '(anything-c-source-recentf
+                         anything-c-source-bookmarks
+                         anything-c-source-files-in-current-dir+
+                         anything-c-source-locate))
+         (sources `(anything-c-source-buffers+
+                    anything-c-source-ffap-line
+                    anything-c-source-ffap-guesser
+                    ,@git-source
+                    ,@other-source)))
+    (anything-other-buffer sources "*anything for files*")))
+
