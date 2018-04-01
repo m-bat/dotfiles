@@ -7,8 +7,6 @@ export PATH="$PATH:/anaconda3/bin"
 <<<<<<< HEAD
 alias emacs="/usr/local/bin/emacs-25.3"
 export TEXINPUTS='.//;'
-=======
->>>>>>> 8923aa65db09a04f87cf6cd088f80934a92d91ca
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
