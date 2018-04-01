@@ -71,13 +71,31 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (0blayout descbinds-anything describe-number anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
+    (anything-exuberant-ctags ctags-update 0blayout descbinds-anything describe-number anything-git-files python-mode flycheck-yamllint flymake-yaml yaml-mode yatex markdown-mode highlight-indent-guides web-mode php-mode moccur-edit color-moccur undohist anything flycheck-pos-tip)))
  '(py-indent-offset 4))
 ;;; abbrev
 
 ;;YAML mode の設定
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+
+;;GTAGS 設定
+(require 'gtags)
+(global-set-key "\M-t" 'gtags-find-tag)
+(global-set-key "\M-r" 'gtags-find-rtag)
+(global-set-key "\M-s" 'gtags-find-symbol)
+(global-set-key "\M-a" 'gtags-pop-stack)
+
+;; AutoUpdate GTAGS file
+(defun my-c-mode-update-gtags ()
+  (let* ((file (buffer-file-name (current-buffer)))
+     (dir (directory-file-name (file-name-directory file))))
+    (when (executable-find "global")
+      (start-process "gtags-update" nil
+             "global" "-uv"))))
+
+(add-hook 'after-save-hook
+      'my-c-mode-update-gtags)
 
 ;; hook
 (add-hook 'c-mode-hook 'my-c-c++-mode-init)
@@ -99,8 +117,12 @@
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   (ac-config-default))
 
-;;flycheck
+;; anything-exuberant-ctags
+(when (require 'anything nil t)
+  (require 'anything-exuberant-ctags)
+  )
 
+;;flycheck
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

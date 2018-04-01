@@ -1,1 +1,1 @@
-/Users/sugimotomanabu/dotfiles/.emacs.d
+/Users/m_sugimoto/dotfiles/.emacs.d

@@ -19,6 +19,7 @@ formulas=(
     curl
     tree
     openssl
+    reattach-to-user-namespace
     "--without-etcdir zsh"
     zsh-completions
     emacs
