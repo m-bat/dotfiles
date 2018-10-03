@@ -47,7 +47,7 @@
 										;parenのスタイル expressionは括弧内も強調表示
 (setq show-paren-style 'expression)
 										;フェイス（後述）を変更
-(set-face-background 'show-paren-match-face "yellow")
+;;(set-face-background 'show-paren-match-face "yellow")
 ;;行番号を表示する
 (global-linum-mode)
 ;;インテンドの設定
@@ -80,22 +80,22 @@
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
 ;;GTAGS 設定
-(require 'gtags)
-(global-set-key "\M-t" 'gtags-find-tag)
-(global-set-key "\M-r" 'gtags-find-rtag)
-(global-set-key "\M-s" 'gtags-find-symbol)
-(global-set-key "\M-a" 'gtags-pop-stack)
+;; (require 'gtags)
+;; (global-set-key "\M-t" 'gtags-find-tag)
+;; (global-set-key "\M-r" 'gtags-find-rtag)
+;; (global-set-key "\M-s" 'gtags-find-symbol)
+;; (global-set-key "\M-a" 'gtags-pop-stack)
 
 ;; AutoUpdate GTAGS file
-(defun my-c-mode-update-gtags ()
-  (let* ((file (buffer-file-name (current-buffer)))
-     (dir (directory-file-name (file-name-directory file))))
-    (when (executable-find "global")
-      (start-process "gtags-update" nil
-             "global" "-uv"))))
+;; (defun my-c-mode-update-gtags ()
+;;   (let* ((file (buffer-file-name (current-buffer)))
+;;      (dir (directory-file-name (file-name-directory file))))
+;;     (when (executable-find "global")
+;;       (start-process "gtags-update" nil
+;;              "global" "-uv"))))
 
-(add-hook 'after-save-hook
-      'my-c-mode-update-gtags)
+;; (add-hook 'after-save-hook
+;;       'my-c-mode-update-gtags)
 
 ;; hook
 (add-hook 'c-mode-hook 'my-c-c++-mode-init)
