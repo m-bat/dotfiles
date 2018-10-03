@@ -29,6 +29,7 @@ formulas=(
     markdown
     ctags
     ssh-copy-id
+    tmux
 )
 
 
