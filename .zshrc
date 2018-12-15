@@ -5,6 +5,9 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=$HOME/.oh-my-zsh
 export PATH="$PATH:/anaconda3/bin"
 alias emacs="/usr/local/bin/emacs-25.3"
+export TEXINPUTS='.//;'
+export BSTINPUTS='.//;'
+export BIBINPUTS='.//;'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -147,3 +150,4 @@ function tmux_automatically_attach_session()
     fi
 }
 tmux_automatically_attach_session
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
