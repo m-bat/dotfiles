@@ -49,7 +49,7 @@
 										;フェイス（後述）を変更
 ;;(set-face-background 'show-paren-match-face "yellow")
 ;;行番号を表示する
-(global-linum-mode)
+;;(global-linum-mode)
 ;;インテンドの設定
 (setq default-tab-width 4)
 
